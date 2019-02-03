@@ -1,0 +1,47 @@
+{% extends "webscraper/base.html" %}
+{% block content %}
+
+    <div class="container p-4">
+        <h2 class="mb-3">{{ user }} - total files ({{ page_obj.paginator.count }})</h2>
+        <div class="row">
+        <img class="rounded-circle filelist-img" src="{{ user.profile.image.url }}">
+        <div>
+            <table>
+                <tr>
+                    <th style="width: 120px;">Date</th>
+                    <th style="width: 300px;">Name</th>
+                    <th style="width: 100px;">Excel File</th>
+                </tr>
+                {% for file in files %}
+                    <tr>
+                        <td>{{ file.date|date:"d.m.Y" }}</td>
+                        <td>{{ file.fight_name }}</td>
+                        <td><a href="{{ file.excel_file.url }}">Download</a> </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+      </div>
+    </div>
+    {% if is_paginated %}
+    <div class="container mt-3" align="center">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-dark mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-dark mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-dark mb-4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-dark mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "webscraper/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="container">
+            <h1 class="p-3" style="text-align: center;">How to use Albion killboard webscraper?</h1>
+            <div>
+                <h3>1. Create an account!</h3>
+                <p>Click on "register" button in upper right corner. Type a username, e-mail address and password and click "Sign up" button</p>
+            </div>
+            <div>
+                <h3>2. Login and go to "Webscraper" tab</h3>
+                <p>As You can see all You need to provide is "Fight name" i.e. "PoE vs Arch - Cleyhill", which is gonna be used to name your output file. Your file's name will be today's date followed by "-" and fight name.</p>
+            </div>
+            <div>
+                <h3>3. Get actual killboard links!</h3>
+                <p class="">Go to <a href="https://albiononline.com/en/killboard">https://albiononline.com/en/killboard</a> find kills You need and paste them below.</p>
+                <img class="img-fluid how-to-img" src="{% static 'webscraper/get_links.jpg' %}">
+                <p class="mt-4">You can even copy them straight from your guild's Discord.</p>
+                <img class="img-fluid how-to-img" src="{% static 'webscraper/paste_links.jpg' %}">
+            </div>
+            <div>
+                <h3>4. Press "Submit" and...</h3>
+                <p>Now all You need to do is give it some time. Now the script needs to go to each of this link, fetch the data and put it in an Excel file. It usually takes from few seconds, up to even a dozen of minutes. It all depends on how many links You provided.</p>
+            </div>
+            <div>
+                <h3>5. Where's my file?</h3>
+                <p>Once the file is ready it's gonna appear in "Your files". Simply click the "Download" to get it.</p>
+                <img class="img-fluid how-to-img" src="{% static 'webscraper/your_files.jpg' %}">
+                <img class="img-fluid mb-5 how-to-img" src="{% static 'webscraper/excel_file.jpg' %}">
+            </div>
+            <div class="mb-5">
+                <h3>6. That's all!</h3>
+                <p>Now You can easily compensate your guildmates, who had fallen in that fight.</p>
+                <img class="img-fluid my-3 how-to-img" src="{% static 'webscraper/enjoy.jpg' %}">
+            </div>
+        </div>
+    </div>
+{% endblock content %}
