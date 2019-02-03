@@ -11,8 +11,26 @@ import re
 from albion_compensations.settings import BASE_DIR, MEDIA_ROOT
 
 '''
-Program korzystając z biblioteki selenium i przeglądarki PhantomJS zczytuje informacje o zabitej postaci, tj.
-jej nick, gildię, item power oraz przedmioty noszone podczas śmierci.
+Script fetching data from Albion Online killboard websites provided by user.
+At the end it generates an Excel file with all the data.
+
+def create_kill_id_list(text) - function which takes user's input and using regex searches
+for Albion Online killboard link patterns. Even if user passess: "fsdhttps://albiononline.com/pl/killboard/kill/2490053454354",
+it is still going to get this "https://albiononline.com/en/killboard/kill/24900534" link. It returns a list with all URLs.
+
+def create_table(kill_id_list) - function that takes a list of all killboard URLs, returning a "dict_list" - dictionary containing all
+the user friendly data.
+
+def generate_dict(kill_id, dict_list) - function which taking a single url and using Selenium module with BeautifulSoup fetches
+all the required data.
+
+class ItemsUnique - All fetched data is being saved using this class. Nick, Guild, Item power and equipment.
+This is all raw data i.e. weapon -  "T6_MAIN_CURSEDSTAFF.png?count=1&quality=2".
+
+class Item - Another class, which takes ItemsUnique objects and using them creates more detailed and user friendly output.
+
+def generate_excel(dict_list, fight_name) - function which uses dict_list to generate an Excel file from a Pandas DataFrame.
+
 '''
 
 
