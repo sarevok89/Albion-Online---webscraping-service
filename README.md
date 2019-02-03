@@ -45,3 +45,11 @@ Finally I put all together using Django. I created a website, where users can cr
 generated files.
 
 ![your_files](https://user-images.githubusercontent.com/22706780/52182123-235b3d00-27fa-11e9-888e-090c1dc978de.jpg)
+
+## Plans and ideas:
+
+### I started working on adding multiprocessing to actually speed it all up, since fetching data from i.e. 50 links takes about 8 minutes. Using 7 cores of my CPU I managed to get it down to less than 1 minute, but there are still some issues with it.
+
+### I'm also working on implementing Python Celery module, so users won't need to wait for the file to generate. They will be moved to main page and file creation will be handled as background process. Once it's all done they will be notified.
+
+### In near future I'm going to deploy my website on the Internet.
