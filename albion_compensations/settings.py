@@ -139,7 +139,7 @@ EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Albion Compensations'
-EMAIL_HOST_USER = os.environ.get('sendgrid_username')
-EMAIL_HOST_PASSWORD = os.environ.get('sendgrid_password')
+EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 
 django_heroku.settings(locals())
