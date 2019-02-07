@@ -8,7 +8,7 @@ import datetime
 import json
 import os
 import re
-from albion_compensations.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
+from albion_compensations.settings import MEDIA_ROOT, STATIC_ROOT
 
 '''
 Program korzystając z biblioteki selenium i przeglądarki PhantomJS zczytuje informacje o zabitej postaci, tj.
@@ -32,7 +32,6 @@ def create_table(kill_id_list):
     dict_list = []
 
     def generate_dict(kill_id, dict_list):
-        print(os.path.join(BASE_DIR, r'webscraper\chromedriver.exe'))
         url = 'https://albiononline.com/en/killboard/kill/' + kill_id
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
@@ -95,7 +94,7 @@ def create_table(kill_id_list):
                 except:
                     self.mount_unique = None
 
-        with open(os.path.join(BASE_DIR, r'webscraper\static\webscraper\items_dict.json'), 'r') as json_file:
+        with open(os.path.join(STATIC_ROOT, 'webscraper', 'items_dict.json'), 'r') as json_file:
             items_dict = json.load(json_file)
 
         quality_dict = {'1': 'Normal', '2': 'Good', '3': 'Outstanding', '4': 'Excellent', '5': 'Masterpiece'}
@@ -200,19 +199,18 @@ def generate_excel(dict_list, fight_name):
     current_date = f"{today.day}-{today.month}-{today.year} - "
     file_name = current_date + fight_name + '.xlsx'
 
-    if not os.path.isfile(os.path.join(MEDIA_ROOT, f"webscraper\compensations\{file_name}")):
-        writer = ExcelWriter((os.path.join(MEDIA_ROOT, f"webscraper\compensations\{file_name}")))
+    if not os.path.isfile(os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', f'{file_name}')):
+        writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', f'{file_name}')))
     else:
         while True:
-            if os.path.isfile(os.path.join(MEDIA_ROOT, f"webscraper\compensations\{file_name}")):
+            if os.path.isfile(os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', f'{file_name}')):
                 num_of_files += 1
                 file_name = current_date + fight_name + f'({num_of_files}).xlsx'
                 continue
             else:
-                writer = ExcelWriter((os.path.join(MEDIA_ROOT, f"webscraper\compensations\{file_name}")))
+                writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', f'{file_name}')))
                 break
 
-    # writer = ExcelWriter((os.path.join(MEDIA_ROOT, f"webscraper\compensations\{fight_name}.xlsx")))
     df.to_excel(writer, 'Sheet 1', header=False)
 
     workbook = writer.book
