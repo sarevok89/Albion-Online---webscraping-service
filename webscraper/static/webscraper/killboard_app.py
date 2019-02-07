@@ -8,7 +8,7 @@ import datetime
 import json
 import os
 import re
-from albion_compensations.settings import BASE_DIR, MEDIA_ROOT
+from albion_compensations.settings import BASE_DIR, MEDIA_ROOT, STATIC_ROOT
 
 '''
 Program korzystając z biblioteki selenium i przeglądarki PhantomJS zczytuje informacje o zabitej postaci, tj.
@@ -36,7 +36,7 @@ def create_table(kill_id_list):
         url = 'https://albiononline.com/en/killboard/kill/' + kill_id
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
-        browser = webdriver.Chrome(options=options, executable_path=os.path.join(BASE_DIR, r'webscraper\static\webscraper\chromedriver.exe'))
+        browser = webdriver.Chrome(options=options, executable_path=os.path.join(STATIC_ROOT, 'webscraper', 'chromedriver.exe'))
         browser.get(url)
         element = WebDriverWait(browser, 10).until(lambda x: x.find_element_by_class_name('kill__body'))
         html = browser.page_source
