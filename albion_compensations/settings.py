@@ -132,11 +132,14 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'webscraper-home'
 LOGIN_URL = 'login'
 
+
+SEND_GRID_API = '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'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_POST = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('gmail_username')
-EMAIL_HOST_PASSWORD = os.environ.get('gmail_password')
+DEFAULT_FROM_EMAIL = 'Albion Compensations'
+EMAIL_HOST_USER = os.environ.get('sendgrid_username')
+EMAIL_HOST_PASSWORD = os.environ.get('sendgrid_password')
 
 django_heroku.settings(locals())
