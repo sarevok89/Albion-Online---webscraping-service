@@ -200,16 +200,16 @@ def generate_excel(dict_list, fight_name):
     current_date = f"{today.day}-{today.month}-{today.year} - "
     file_name = current_date + fight_name + '.xlsx'
 
-    if not os.path.isfile(os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', file_name)):
-        writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', file_name)))
+    if not os.path.isfile(os.path.join(MEDIA_ROOT, 'compensations', file_name)):
+        writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'compensations', file_name)))
     else:
         while True:
-            if os.path.isfile(os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', file_name)):
+            if os.path.isfile(os.path.join(MEDIA_ROOT, 'compensations', file_name)):
                 num_of_files += 1
                 file_name = current_date + fight_name + f'({num_of_files}).xlsx'
                 continue
             else:
-                writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'webscraper', 'compensations', file_name)))
+                writer = ExcelWriter((os.path.join(MEDIA_ROOT, 'compensations', file_name)))
                 break
 
     df.to_excel(writer, 'Sheet 1', header=False)
