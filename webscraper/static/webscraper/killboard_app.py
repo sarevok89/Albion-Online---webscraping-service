@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 import pandas as pd
 from pandas import ExcelWriter
@@ -33,9 +32,11 @@ def create_table(kill_id_list):
 
     def generate_dict(kill_id, dict_list):
         url = 'https://albiononline.com/en/killboard/kill/' + kill_id
+        chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', None)
         options = webdriver.ChromeOptions()
+        options.binary_location = chrome_bin
         options.add_argument('headless')
-        browser = webdriver.Chrome(options=options, executable_path=os.path.join(STATIC_ROOT, 'webscraper', 'chromedriver'))
+        browser = webdriver.Chrome(options=options, executable_path="chromedriver")
         browser.get(url)
         element = WebDriverWait(browser, 10).until(lambda x: x.find_element_by_class_name('kill__body'))
         html = browser.page_source
