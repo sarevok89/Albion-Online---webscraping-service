@@ -33,11 +33,11 @@ class WebscraperView(View):
             with open(os.path.join(MEDIA_ROOT, 'compensations', file_name)) as f:
                 file = File(f)
             obj.excel_file = file.name
-            print("Printing: ", obj.excel_file)
+            obj.excel_file.url = str(obj.excel_file.url).replace('app/', '')
             obj.save()
 
             context = {
-                'file_url': obj.excel_file.path,
+                'file_url': obj.excel_file.url,
                 'file_name': file_name
             }
 
