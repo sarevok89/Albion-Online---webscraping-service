@@ -6,7 +6,7 @@ from django.core.files import File
 from .forms import WebscraperForm
 from .models import Killboard, Post
 from .static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
-from albion_compensations.settings import MEDIA_ROOT
+from albion_compensations.settings import BASE_DIR
 import os
 
 
@@ -30,7 +30,7 @@ class WebscraperView(View):
             obj = Killboard()
             obj.fight_name = fight_name
             obj.user = self.request.user
-            with open(os.path.join(MEDIA_ROOT, 'compensations', file_name)) as f:
+            with open(os.path.join(BASE_DIR, 'app', 'media', 'compensations', file_name)) as f:
                 file = File(f)
             obj.excel_file = file.name
             obj.save()
