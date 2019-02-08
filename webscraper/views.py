@@ -30,13 +30,14 @@ class WebscraperView(View):
             obj = Killboard()
             obj.fight_name = fight_name
             obj.user = self.request.user
-            with open(os.path.join('compensations', file_name)) as f:
+            with open(os.path.join(MEDIA_ROOT, 'compensations', file_name)) as f:
                 file = File(f)
             obj.excel_file = file.name
+            print("Printing: ", obj.excel_file)
             obj.save()
 
             context = {
-                'file_url': obj.excel_file.url,
+                'file_url': obj.excel_file,
                 'file_name': file_name
             }
 
