@@ -36,7 +36,7 @@ class WebscraperView(View):
             obj.save()
 
             context = {
-                'file_url': obj.excel_file.url,
+                'file_url': obj.excel_file,
                 'file_name': file_name
             }
 
