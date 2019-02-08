@@ -5,7 +5,7 @@
         <div class="container text-center">
             <h3>Hey, Thanks for using my website! Your file has been generated and is now ready to download.</h3>
             <p>{{ file_name }}</p>
-            <a class="btn btn-success mt-3" href="{{ file_url }}">Download</a>
+            <a class="btn btn-success mt-3" href="{% media file_url %}">Download</a>
         </div>
     </div>
 {% endblock content %}
