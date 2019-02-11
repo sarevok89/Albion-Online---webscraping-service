@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 from users import views as user_views
 
 urlpatterns = [
-    path('', include('webscraper.urls')),
     path('app/', include('webscraper.urls')),
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
