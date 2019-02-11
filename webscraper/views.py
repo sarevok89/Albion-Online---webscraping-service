@@ -6,7 +6,9 @@ from django.core.files import File
 from .forms import WebscraperForm
 from .models import Killboard, Post
 from .static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
-from albion_compensations.settings import MEDIA_ROOT
+from albion_compensations.settings import BASE_DIR
+from albion_compensations.aws.conf import *
+import boto3
 import os
 
 
@@ -30,9 +32,15 @@ class WebscraperView(View):
             obj = Killboard()
             obj.fight_name = fight_name
             obj.user = self.request.user
-            with open(os.path.join(MEDIA_ROOT, 'compensations', file_name)) as f:
+            with open(os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)) as f:
                 file = File(f)
-            obj.excel_file = file.name
+
+            temp_file = os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)
+
+            s3 = boto3.client('s3')
+            s3.meta.client.upload_file(temp_file, 'albion-compensations', file_name)
+
+            obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
             obj.save()
 
             context = {
