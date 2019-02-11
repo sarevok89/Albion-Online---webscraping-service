@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import datetime
 import django_heroku
 from albion_compensations.aws.conf import *
 

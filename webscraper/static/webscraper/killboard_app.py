@@ -7,7 +7,7 @@ import datetime
 import json
 import os
 import re
-from albion_compensations.settings import MEDIA_ROOT, STATIC_URL, BASE_DIR
+from albion_compensations.settings import STATIC_URL, BASE_DIR
 
 
 '''
@@ -114,7 +114,7 @@ def create_table(kill_id_list):
                 except:
                     self.mount_unique = None
 
-        with open(os.path.join(STATIC_URL, 'webscraper', 'items_dict.json'), 'r') as json_file:
+        with open(os.path.join(BASE_DIR, 'webscraper', 'static', 'webscraper', 'items_dict.json'), 'r') as json_file:
             items_dict = json.load(json_file)
 
         quality_dict = {'1': 'Normal', '2': 'Good', '3': 'Outstanding', '4': 'Excellent', '5': 'Masterpiece'}
