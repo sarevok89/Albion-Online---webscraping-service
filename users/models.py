@@ -27,18 +27,7 @@ class Profile(models.Model):
         im.save(output, format='JPEG', quality=90)
         output.seek(0)
 
-        # change the imagefield value to be the newley modifed image value
+        # change the imagefield value to be the newly modified image value
         self.image = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.image.name.split('.')[0], 'image/jpeg',
                                           sys.getsizeof(output), None)
         super().save(*args, **kwargs)
-
-
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #
-    #     img = Image.open(self.image.name).convert('RGB')
-    #
-    #     if img.height > 300 or img.width > 300:
-    #         output_size = (300, 300)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.name)
