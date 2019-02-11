@@ -32,7 +32,7 @@ class WebscraperView(View):
             obj.user = self.request.user
             with open(os.path.join(MEDIA_ROOT, 'compensations', file_name)) as f:
                 file = File(f)
-            obj.excel_file.url = file.name
+            obj.excel_file = file.name
             obj.save()
 
             context = {
