@@ -16,7 +16,7 @@
                     <tr>
                         <td>{{ file.date|date:"d.m.Y" }}</td>
                         <td>{{ file.fight_name }}</td>
-                        <td><a href="{{ file.excel_file.url }}">Download</a> </td>
+                        <td><a href="{{ file.excel_file.name }}">Download</a> </td>
                     </tr>
                 {% endfor %}
             </table>

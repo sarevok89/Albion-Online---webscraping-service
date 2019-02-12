@@ -144,7 +144,7 @@ AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = False
 
-DEFAULT_FILE_STORAGE = 'albion_compensations.aws.utils.MediaRootS3BotoStorage'
+# DEFAULT_FILE_STORAGE = 'albion_compensations.aws.utils.MediaRootS3BotoStorage'
 # STATICFILES_STORAGE = 'albion_compensations.aws.utils.StaticRootS3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'albion-compensations'
 S3DIRECT_REGION = 'us-east-2'
