@@ -220,23 +220,24 @@ def generate_excel(dict_list, fight_name):
     current_date = f"{today.day}-{today.month}-{today.year} - "
     file_name = current_date + fight_name + '.xlsx'
 
-    s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
-                        aws_secret_access_key='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')
-    bucket = s3.Bucket('albion-compensations')
-    objs = list(bucket.objects.filter(Prefix=file_name))
+    # s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
+    #                     aws_secret_access_key='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')
+    # bucket = s3.Bucket('albion-compensations')
+    # objs = list(bucket.objects.filter(Prefix=file_name))
+    #
+    # if len(objs) == 0 or objs[0].key != file_name:
+    #     writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
+    # else:
+    #     while True:
+    #         if len(objs) > 0 and objs[0].key == file_name:
+    #             num_of_files += 1
+    #             file_name = current_date + fight_name + f'({num_of_files}).xlsx'
+    #             continue
+    #         else:
+    #             writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
+    #             break
 
-    if len(objs) == 0 or objs[0].key != file_name:
-        writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
-    else:
-        while True:
-            if len(objs) > 0 and objs[0].key == file_name:
-                num_of_files += 1
-                file_name = current_date + fight_name + f'({num_of_files}).xlsx'
-                continue
-            else:
-                writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
-                break
-
+    writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
     df.to_excel(writer, 'Sheet 1', header=False)
 
     workbook = writer.book

@@ -34,8 +34,6 @@ class WebscraperView(View):
             obj.user = self.request.user
 
             temp_file = os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)
-            with open(temp_file) as f:
-                file = File(f)
 
             s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                                 aws_secret_access_key='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')
