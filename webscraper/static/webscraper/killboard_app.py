@@ -238,7 +238,7 @@ def generate_excel(dict_list, fight_name):
     #             writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
     #             break
 
-    writer = ExcelWriter(os.path.join(os.path.join(MEDIA_ROOT, 'compensations', file_name)))
+    writer = ExcelWriter(os.path.join(os.path.join(MEDIA_ROOT, file_name)))
     df.to_excel(writer, 'Sheet 1', header=False)
 
     workbook = writer.book
@@ -250,5 +250,4 @@ def generate_excel(dict_list, fight_name):
     worksheet.set_column('A:Z', 18, new_format)
 
     writer.save()
-    print("Successfully created new file!")
     return file_name

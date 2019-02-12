@@ -5,7 +5,7 @@ from django.views.generic import View, ListView, DetailView, CreateView, UpdateV
 from django.core.files import File
 from .forms import WebscraperForm
 from .models import Killboard, Post
-from .static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
+from webscraper.static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
 from albion_compensations.settings import BASE_DIR, MEDIA_ROOT
 # from albion_compensations.aws.conf import *
 import boto3
