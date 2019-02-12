@@ -227,7 +227,7 @@ def generate_excel(dict_list, fight_name):
     objs = list(bucket.objects.filter(Prefix=file_name))
 
     if len(objs) == 0 or objs[0].key != file_name:
-        writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
+        writer = ExcelWriter(os.path.join('media', file_name))
     else:
         while True:
             if len(objs) > 0 and objs[0].key == file_name:
@@ -235,7 +235,7 @@ def generate_excel(dict_list, fight_name):
                 file_name = current_date + fight_name + f'({num_of_files}).xlsx'
                 continue
             else:
-                writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
+                writer = ExcelWriter(os.path.join('media', file_name))
                 break
 
     df.to_excel(writer, 'Sheet 1', header=False)
