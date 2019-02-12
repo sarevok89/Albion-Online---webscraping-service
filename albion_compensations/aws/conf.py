@@ -22,3 +22,8 @@ AWS_HEADERS = {
     'Expires': expires,
     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 }
+
+aws_secret_key_id = 'AKIAJZ7G7LLNHVOEGTKA'
+aws_secret_access_key = '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'
+
+# s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA', aws_secret_access_key='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')

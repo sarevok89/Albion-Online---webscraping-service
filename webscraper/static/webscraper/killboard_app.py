@@ -220,7 +220,8 @@ def generate_excel(dict_list, fight_name):
     current_date = f"{today.day}-{today.month}-{today.year} - "
     file_name = current_date + fight_name + '.xlsx'
 
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
+                        aws_secret_access_key='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')
     bucket = s3.Bucket('albion-compensations')
     objs = list(bucket.objects.filter(Prefix=file_name))
 
