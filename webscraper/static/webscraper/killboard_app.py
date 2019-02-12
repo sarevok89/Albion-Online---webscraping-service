@@ -249,4 +249,5 @@ def generate_excel(dict_list, fight_name):
     worksheet.set_column('A:Z', 18, new_format)
 
     writer.save()
+    print("Successfully created new file!")
     return file_name
