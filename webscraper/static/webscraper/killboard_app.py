@@ -237,7 +237,7 @@ def generate_excel(dict_list, fight_name):
     #             writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
     #             break
 
-    writer = ExcelWriter((os.path.join(BASE_DIR, file_name)))
+    writer = ExcelWriter(os.path.join(BASE_DIR, file_name))
     df.to_excel(writer, 'Sheet 1', header=False)
 
     workbook = writer.book
