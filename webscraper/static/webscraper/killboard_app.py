@@ -225,7 +225,7 @@ def generate_excel(dict_list, fight_name):
     bucket = s3.Bucket('albion-compensations')
     objs = list(bucket.objects.filter(Prefix=file_name))
 
-    if not len(objs) > 0 and objs[0].key == file_name:
+    if len(objs) == 0 or objs[0].key != file_name:
         writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
     else:
         while True:
