@@ -56,7 +56,7 @@ def create_table(kill_id_list):
         options = webdriver.ChromeOptions()
         options.binary_location = chrome_bin
         options.add_argument('headless')
-        browser = webdriver.Chrome(options=options, executable_path="chromedriver")
+        browser = webdriver.Chrome(options=options, executable_path=os.path.join(BASE_DIR, r'webscraper\static\webscraper\chromedriver-windows.exe'))
         browser.get(url)
         element = WebDriverWait(browser, 10).until(lambda x: x.find_element_by_class_name('kill__body'))
         html = browser.page_source
@@ -237,7 +237,7 @@ def generate_excel(dict_list, fight_name):
     #             writer = ExcelWriter((os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)))
     #             break
 
-    writer = ExcelWriter(os.path.join(BASE_DIR, file_name))
+    writer = ExcelWriter(os.path.join(os.path.join(MEDIA_ROOT, 'compensations', file_name)))
     df.to_excel(writer, 'Sheet 1', header=False)
 
     workbook = writer.book
