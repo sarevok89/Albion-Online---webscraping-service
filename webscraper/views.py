@@ -37,9 +37,6 @@ class WebscraperView(View):
 
             temp_file = os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)
 
-            s3 = boto3.client('s3')
-            s3.meta.client.upload_file(temp_file, 'albion-compensations', file_name)
-
             obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
             obj.save()
 
