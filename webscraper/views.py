@@ -37,7 +37,7 @@ class WebscraperView(View):
 
             temp_file = os.path.join(BASE_DIR, 'webscraper', 'temp', file_name)
 
-            obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
+            obj.excel_file.name = MEDIA_ROOT + 'compensations/' + file_name
             obj.save()
 
             context = {
