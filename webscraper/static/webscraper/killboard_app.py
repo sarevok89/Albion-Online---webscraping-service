@@ -56,7 +56,8 @@ def create_table(kill_id_list):
         options = webdriver.ChromeOptions()
         options.binary_location = chrome_bin
         options.add_argument('headless')
-        browser = webdriver.Chrome(options=options, executable_path=os.path.join(BASE_DIR, r'webscraper\static\webscraper\chromedriver-windows.exe'))
+        # browser = webdriver.Chrome(options=options, executable_path=os.path.join(BASE_DIR, r'webscraper\static\webscraper\chromedriver-windows.exe'))
+        browser = webdriver.Chrome(options=options, executable_path="chromedriver")
         browser.get(url)
         element = WebDriverWait(browser, 10).until(lambda x: x.find_element_by_class_name('kill__body'))
         html = browser.page_source
