@@ -224,32 +224,22 @@ def generate_excel(dict_list, fight_name):
     s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                         aws_secret_access_key='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')
     bucket = s3.Bucket('albion-compensations')
-    objs = list(bucket.objects.filter(Prefix='media/compensations/' + file_name))
 
-    if len(objs) > 0 and objs[0].key != 'media/compensations' + file_name:
+    objs = list(bucket.objects.filter(Prefix='media/compensations/' + file_name))
+    print(len(objs))
+
+    if len(objs) == 0:
         writer = ExcelWriter(os.path.join(MEDIA_ROOT, 'compensations', file_name))
     else:
         while True:
             objs = list(bucket.objects.filter(Prefix='media/compensations/' + file_name))
-            if len(objs) > 0 and objs[0].key == 'media/compensations' + file_name:
+            if len(objs) > 0:
                 num_of_files += 1
-                file_name = current_date + fight_name + f'( {num_of_files}).xlsx'
+                file_name = current_date + fight_name + f' ({num_of_files}).xlsx'
                 continue
             else:
                 writer = ExcelWriter(os.path.join(MEDIA_ROOT, 'compensations', file_name))
                 break
-
-    # if len(objs) == 0 or objs[0].key != file_name:
-    #     writer = ExcelWriter(os.path.join(MEDIA_ROOT, 'compensations', file_name))
-    # else:
-    #     while True:
-    #         if len(objs) > 0 and objs[0].key == file_name:
-    #             num_of_files += 1
-    #             file_name = current_date + fight_name + f'({num_of_files}).xlsx'
-    #             continue
-    #         else:
-    #             writer = ExcelWriter(os.path.join(MEDIA_ROOT, 'compensations', file_name))
-    #             break
 
     df.to_excel(writer, 'Sheet 1', header=False)
 
