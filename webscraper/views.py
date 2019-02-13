@@ -2,12 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.core.files import File
 from .forms import WebscraperForm
 from .models import Killboard, Post
 from webscraper.static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
 from albion_compensations.settings import MEDIA_ROOT, MEDIA_S3_URL
-# from albion_compensations.aws.conf import *
 import boto3
 import os
 
@@ -36,9 +34,7 @@ class WebscraperView(View):
             temp_file = os.path.join(MEDIA_ROOT, 'compensations', file_name)
 
             s3 = boto3.resource('s3')
-            
-            # s3 = boto3.resource('s3', aws_access_key_id=AWS_ACCESS_KEY_ID,
-            #                     aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+
             s3.meta.client.upload_file(temp_file, 'albion-compensations', 'media/compensations/' + file_name)
 
             obj.excel_file.name = MEDIA_S3_URL + 'compensations/' + file_name
