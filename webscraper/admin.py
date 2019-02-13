@@ -3,7 +3,7 @@ from .models import Killboard, Post
 
 
 class KillboardAdmin(admin.ModelAdmin):
-    list_display = ('date', 'user', 'fight_name', 'excel_file')
+    list_display = ('date', 'user', 'fight_name', 'excel_file.name')
 
 
 admin.site.register(Post)
