@@ -33,13 +33,13 @@ class WebscraperView(View):
             obj.fight_name = fight_name
             obj.user = self.request.user
 
-            temp_file = os.path.join(MEDIA_URL, 'compensations', file_name)
+            temp_file = os.path.join(MEDIA_ROOT, 'compensations', file_name)
 
             s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                                 aws_secret_access_key='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')
             s3.meta.client.upload_file(temp_file, 'albion-compensations', MEDIA_S3_ROOT + 'compensations/' + file_name)
 
-            obj.excel_file.name = temp_file
+            obj.excel_file.name = MEDIA_URL + 'compensations/' + file_name
             # obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
             obj.save()
 
