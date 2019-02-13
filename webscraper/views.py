@@ -37,7 +37,7 @@ class WebscraperView(View):
 
             s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                                 aws_secret_access_key='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')
-            s3.meta.client.upload_file(temp_file, 'albion-compensations', MEDIA_S3_ROOT + 'compensations/' + file_name)
+            s3.meta.client.upload_file(temp_file, 'albion-compensations', 'media/compensations/test.xlsx')
 
             obj.excel_file.name = MEDIA_URL + 'compensations/' + file_name
 
