@@ -224,7 +224,7 @@ def generate_excel(dict_list, fight_name):
     s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                         aws_secret_access_key='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')
     bucket = s3.Bucket('albion-compensations')
-    objs = list(bucket.objects.filter(Prefix='compensations/' + file_name))
+    objs = list(bucket.objects.filter(Prefix='media/compensations/' + file_name))
 
     if len(objs) == 0 or objs[0].key != file_name:
         writer = ExcelWriter(os.path.join(MEDIA_ROOT, 'compensations', file_name))
