@@ -153,7 +153,7 @@ MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_ROOT = MEDIA_URL
 # STATIC_URL = S3_URL + 'static/'
 # ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'webscraper', 'static')
 
 two_months = datetime.timedelta(days=61)
 date_two_months_later = datetime.date.today() + two_months
