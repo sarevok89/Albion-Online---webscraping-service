@@ -93,6 +93,7 @@ a.article-title:hover {
   margin-right: 16px;
 }
 
-.how-to-img {
-
+.about-img {
+height: 100%;
+border: solid dark 1px;
 }
