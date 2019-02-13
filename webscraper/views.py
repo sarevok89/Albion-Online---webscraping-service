@@ -6,7 +6,7 @@ from django.core.files import File
 from .forms import WebscraperForm
 from .models import Killboard, Post
 from webscraper.static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
-from albion_compensations.settings import BASE_DIR, MEDIA_ROOT, MEDIA_S3_ROOT
+from albion_compensations.settings import BASE_DIR, MEDIA_ROOT, MEDIA_S3_ROOT, MEDIA_URL
 # from albion_compensations.aws.conf import *
 import boto3
 import os
@@ -33,7 +33,7 @@ class WebscraperView(View):
             obj.fight_name = fight_name
             obj.user = self.request.user
 
-            temp_file = os.path.join(MEDIA_ROOT, 'compensations', file_name)
+            temp_file = os.path.join(MEDIA_URL, 'compensations', file_name)
 
             s3 = boto3.resource('s3', aws_access_key_id='AKIAJZ7G7LLNHVOEGTKA',
                                 aws_secret_access_key='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')
