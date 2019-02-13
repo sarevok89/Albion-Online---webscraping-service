@@ -39,7 +39,8 @@ class WebscraperView(View):
                                 aws_secret_access_key='k6OWnhoXPaD9BuQ7+AC7ylq+o/PRr6bToJhhr+Vs')
             s3.meta.client.upload_file(temp_file, 'albion-compensations', MEDIA_ROOT + 'compensations/' + file_name)
 
-            obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
+            obj.excel_file.name = temp_file
+            # obj.excel_file.name = os.path.join(MEDIA_ROOT, 'compensations', file_name)
             obj.save()
 
             context = {
