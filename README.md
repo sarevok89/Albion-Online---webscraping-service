@@ -25,7 +25,7 @@ pip install html5lib
 pip install XlsxWriter
 ```
 
-## Creating this web app I learned/improved my knowledge using following modules and packages:
+## Creating this web app I learned/improved my knowledge of using following modules and packages:
 
 ### 1. BeautifulSoup and json:
 To create a .json file containing all items available in Albion Online, so I could easily translate
