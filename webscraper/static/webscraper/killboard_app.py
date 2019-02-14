@@ -207,10 +207,10 @@ def create_table(kill_id_list):
         options.add_argument('headless')
 
         # Commented out variables are being used for testing script locally.
-        # browser = webdriver.Chrome(options=options,
-        # executable_path=os.path.join(BASE_DIR, 'webscraper', 'static', 'webscraper', 'chromedriver-windows.exe'))
+        browser = webdriver.Chrome(options=options,
+        executable_path=os.path.join(BASE_DIR, 'webscraper', 'static', 'webscraper', 'chromedriver-windows.exe'))
 
-        browser = webdriver.Chrome(options=options, executable_path="chromedriver")
+        # browser = webdriver.Chrome(options=options, executable_path="chromedriver")
         browser.get(url)
 
         # Below line was added to wait every time for all required page elements to load.

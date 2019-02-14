@@ -36,11 +36,11 @@ class WebscraperView(View):
             s3 = boto3.resource('s3')
             s3.meta.client.upload_file(temp_file, 'albion-compensations', 'media/compensations/' + file_name)
 
-            obj.excel_file.name = MEDIA_S3_URL + 'compensations/' + file_name
+            obj.excel_file = MEDIA_S3_URL + 'compensations/' + file_name
             obj.save()
 
             context = {
-                'file_url': obj.excel_file.name,
+                'file_url': obj.excel_file,
                 'file_name': file_name
             }
 

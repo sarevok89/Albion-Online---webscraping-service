@@ -8,7 +8,7 @@ class Killboard(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     fight_name = models.CharField(max_length=100)
     date = models.DateTimeField(default=timezone.now)
-    excel_file = models.FileField(upload_to='compensations')
+    excel_file = models.CharField(max_length=200)
 
     def __str__(self):
         return self.fight_name
