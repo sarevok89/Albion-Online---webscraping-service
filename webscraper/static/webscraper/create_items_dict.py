@@ -2,11 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-"""
-Na stronie albionchest jest zla nazwa dla Locusa - Eye of Secrets trzeba zmienic na Malevolent Locus
-"""
 
 def generate_items_dict():
+    """
+    Function going through 'albionchest.com' page and fetching data from it. Since it doesn't contain
+    all the required data, few additional dictionaries are provided down below.
+
+    Note: On 'albionchest.com' there's an error in the name of '2H_ENIGMATICORB_MORGANA'. It's 'Eye of Secrets', while
+    it's supposed to be 'Malevolent Locus'. It get's replaced automatically by this script.
+
+    :return: Returns 'items_dict.json' file containing computer friendly names with their user friendly translations of
+    all weapons, armors, shoes, helmets, off hands and capes in Albion Online.
+    """
 
     print('Creating json file for items unique_id > regular_name translation')
     weapon_url = 'http://www.albionchest.com/?direction=&page=1&search=&search_chest_tier=&search_chest_type=Weapon&sort=&utf8=%E2%9C%93'
@@ -43,8 +50,11 @@ def generate_items_dict():
 
             for data_item in data:
                 unique_name = data_item.find('div', {'class': 'block-item this-panel-imgs'})['data-uniquename'][3:]
-                name = data_item.find('div', {'class': 'caption text-item'}).text.replace('\n', "").split()
-                name = ' '.join(name[1:])
+                if unique_name == '2H_ENIGMATICORB_MORGANA':
+                    name = 'Malevolent Locus'
+                else:
+                    name = data_item.find('div', {'class': 'caption text-item'}).text.replace('\n', "").split()
+                    name = ' '.join(name[1:])
                 items_dict[unique_name] = name
 
     capes_dict = {'CAPE': 'Regular Cape', 'CAPEITEM_FW_MARTLOCK': 'Martlock Cape', 'CAPEITEM_FW_FORTSTERLING': 'Fort Sterling Cape', 'CAPEITEM_FW_LYMHURST': 'Lymhurst Cape', 'CAPEITEM_FW_BRIDGEWATCH': 'Bridgewatch Cape', 'CAPEITEM_FW_THETFORD': 'Thetford Cape', 'CAPEITEM_DEMON': 'Demon Cape', 'CAPEITEM_MORGANA': 'Morgana Cape', 'CAPEITEM_KEEPER': 'Keeper Cape', 'CAPEITEM_UNDEAD': 'Undead Cape', 'CAPEITEM_HERETIC': 'Heretic Cape'}
