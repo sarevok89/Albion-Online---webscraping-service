@@ -10,7 +10,7 @@ so I decided to automate it for myself and soon to deplou it as a free Albion da
 ## Getting started:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
-### Installing requirements:
+### Installation of requirements:
 ```
 pip install bs4
 pip install Selenium
