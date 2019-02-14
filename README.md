@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 pip install bs4
 pip install Selenium
 pip install Pandas
-pip install boto3, boto, botocore
+pip install boto3 boto botocore
 pip install Django
 pip install django-storages
 pip install django-crispy-forms
