@@ -1,5 +1,5 @@
 # Albion-Online---webscraping-service
-## This is a webscraping service, which allows users fetching data from Albion Online killboards page and saves it in output Excel file. Check it out [here](http://albion-compensations-app.herokuapp.com/).
+## This is a webscraping service, which allows users fetching data from Albion Online killboards page and saves it in an output Excel file. Check it out [here](http://albion-compensations-app.herokuapp.com/).
 
 I created this web app as a hobby project for my computer game Albion Online.
 Very often in this game guilds pay back for their members gear if they die in battle. Players provide their leaders links
