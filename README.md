@@ -1,5 +1,5 @@
 # Albion-Online---webscraping-service
-## This is a webscraping service, which allows users fetching data from Albion Online killboards page and saves it in an output Excel file. Check it out [here](http://albion-compensations-app.herokuapp.com/).
+## This is a webscraping service, which allows users fetch data from Albion Online killboards page and saves it in an output Excel file. Check it out [here](http://albion-compensations-app.herokuapp.com/).
 
 I created this web app as a hobby project for my computer game Albion Online.
 Very often in this game guilds pay back for their members gear if they die in battle. Players provide their leaders links
@@ -10,22 +10,21 @@ so I decided to automate it for myself and soon to deplou it as a free Albion da
 ## Getting started:
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
-### Installation of requirements:
+### Clone the repository, open your console, move to project directory and run:
+
 ```
-pip install bs4
-pip install Selenium
-pip install Pandas
-pip install boto3 boto botocore
-pip install Django
-pip install django-storages
-pip install django-crispy-forms
-pip install gunicorn
-pip install Pillow
-pip install html5lib
-pip install XlsxWriter
+pip install -e .
 ```
+This command will install all requirements.
 
 ## Creating this web app I learned/improved my knowledge of using following modules and packages:
+
+### 1. Setuptools:
+To make it easier to manage the application.
+
+Run `python setup.py docs` to generate documentation
+
+Run `python setup.py test` to run tests.
 
 ### 1. BeautifulSoup and json:
 To create a .json file containing all items available in Albion Online, so I could easily translate
@@ -69,10 +68,12 @@ Finally I put it all together using Django. I created a website, where users can
 
 ![your_files](https://user-images.githubusercontent.com/22706780/52182123-235b3d00-27fa-11e9-888e-090c1dc978de.jpg)
 
+### 9. RabbitMQ with Pika:
+I managed to add queuing system using RabbitMQ. Now as You can see in repository I have a single worker handling generation of excel files, so the page doesn't hang each time someone adds urls to Killboard. This hasn't been yet updated on Heroku, but it's available to see in repository.
+
+### 10. Docker with Docker-compose:
+Dockerized the whole project. It's now fully automated
+
 ## Plans and ideas:
-
-### I started working on adding multiprocessing to actually speed it all up, since fetching data from i.e. 50 links takes about 8 minutes. Using 7 cores of my CPU I managed to get it down to less than 1 minute, but there are still some issues with it.
-
-### I'm also working on implementing Python Celery module, so users won't need to wait for the file to generate. They are going to be moved to the main page and file creation is going to be handled as a background process. Once it's all done users will recieve a notification.
 
 ### In near future I'm going to move my website from Heroku, to a proper server.
