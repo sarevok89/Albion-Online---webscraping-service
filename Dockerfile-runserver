@@ -1,0 +1,15 @@
+FROM python:3.7
+
+COPY requirements/doc_requirements.txt /albion_compensations/doc_requirements.txt
+COPY requirements/test_requirements.txt /albion_compensations/test_requirements.txt
+COPY requirements/requirements.txt /albion_compensations/requirements.txt
+
+WORKDIR /albion_compensations
+
+RUN pip install --trusted-host pypi.python.org -r doc_requirements.txt -r test_requirements.txt -r requirements.txt
+
+COPY . /albion_compensations/
+
+EXPOSE 8000
+
+CMD ["uwsgi", "--ini", "albion_compensations/uwsgi.ini"]

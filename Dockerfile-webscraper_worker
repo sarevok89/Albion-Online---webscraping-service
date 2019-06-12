@@ -1,0 +1,23 @@
+FROM python:3.7
+
+COPY requirements/doc_requirements.txt /worker/doc_requirements.txt
+COPY requirements/test_requirements.txt /worker/test_requirements.txt
+COPY requirements/requirements.txt /worker/requirements.txt
+
+WORKDIR /worker
+
+RUN apt-get update
+RUN apt-get install -y apt-utils
+RUN apt-get install -y libappindicator3-1 fonts-liberation libasound2 libnspr4 libnss3 lsb-release xdg-utils
+
+ENV PATH=${PATH}:/chrome/chromedriver-76/chromedriver
+
+RUN pip install --trusted-host pypi.python.org -r doc_requirements.txt -r test_requirements.txt -r requirements.txt
+
+COPY . /worker/
+
+RUN touch /etc/default/google-chrome && dpkg -i chrome/google-chrome-stable_current_amd64.deb
+
+#EXPOSE 5672
+
+#CMD ["python", "webscraper/worker.py"]

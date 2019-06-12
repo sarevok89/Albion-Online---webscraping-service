@@ -3,3 +3,11 @@ staticfiles
 Virtual
 .ipynb_checkpoints
 __pycache__
+.eggs/
+.flake8
+.idea/
+.env
+*.egg-info/
+
+
+

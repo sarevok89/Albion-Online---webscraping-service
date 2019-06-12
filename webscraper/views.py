@@ -1,13 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.models import User
-from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
-from .forms import WebscraperForm
-from .models import Killboard, Post
-from webscraper.static.webscraper.killboard_app import create_table, create_kill_id_list, generate_excel
-from albion_compensations.settings import MEDIA_ROOT, MEDIA_S3_URL
-import boto3
-import os
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import View, ListView, DetailView, CreateView, \
+    UpdateView, DeleteView
+
+from webscraper.forms import WebscraperForm
+from webscraper.models import Killboard, Post
+from albion_compensations.wsgi import publisher
 
 
 class WebscraperView(View):
@@ -19,32 +19,19 @@ class WebscraperView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
+        publisher.connect('webscraper')
         form = WebscraperForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data['urls']
             fight_name = form.cleaned_data['fight_name']
-            kill_id_list = create_kill_id_list(text)
-            dict_list = create_table(kill_id_list)
-            file_name = generate_excel(dict_list, fight_name)
 
-            obj = Killboard()
-            obj.fight_name = fight_name
-            obj.user = self.request.user
+            body = json.dumps({'text': text,
+                               'fight_name': fight_name,
+                               'user': self.request.user.username})
 
-            temp_file = os.path.join(MEDIA_ROOT, 'compensations', file_name)
+            publisher.publish('webscraper', body)
 
-            s3 = boto3.resource('s3')
-            s3.meta.client.upload_file(temp_file, 'albion-compensations', 'media/compensations/' + file_name)
-
-            obj.excel_file = MEDIA_S3_URL + 'compensations/' + file_name
-            obj.save()
-
-            context = {
-                'file_url': obj.excel_file,
-                'file_name': file_name
-            }
-
-            return render(request, 'webscraper/download_file.html', context)
+            return render(request, 'webscraper/download_file.html')
 
 
 def home(request):
@@ -70,7 +57,8 @@ class UserPostListView(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        user = get_object_or_404(
+            self.request.user, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
@@ -121,7 +109,8 @@ class FilesListView(LoginRequiredMixin, ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Killboard.objects.filter(user=self.request.user).order_by('-date')
+        return Killboard.objects.filter(
+            user=self.request.user).order_by('-date')
 
 
 def about(request):

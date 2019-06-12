@@ -28,6 +28,11 @@ class Profile(models.Model):
         output.seek(0)
 
         # change the imagefield value to be the newly modified image value
-        self.image = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.image.name.split('.')[0], 'image/jpeg',
-                                          sys.getsizeof(output), None)
+        self.image = InMemoryUploadedFile(
+            output,
+            'ImageField',
+            "%s.jpg" % self.image.name.split('.')[0],
+            'image/jpeg',
+            sys.getsizeof(output),
+            None)
         super().save(*args, **kwargs)
