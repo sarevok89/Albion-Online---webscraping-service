@@ -3,7 +3,7 @@
 
 I created this web app as a hobby project for my computer game Albion Online.
 Very often in this game guilds pay back for their members gear if they die in battle. Players provide their leaders links
-to their "killboard" page, i.e. https://albiononline.com/en/killboard/kill/25430696.
+to their "killboard" page, i.e. https://albiononline.com/en/killboard/kill/39282911.
 I found it very time consuming vising every link, reading data manually and putting it in an Excel file,
 so I decided to automate it for myself and soon to deplou it as a free Albion data fetching web application.
 
