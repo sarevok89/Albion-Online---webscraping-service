@@ -24,9 +24,9 @@ To make it easier to manage the application.
 
 Run `python setup.py docs` to generate Sphinx documentation
 
-Run `python setup.py test` to install testing requirements run tests
+Run `python setup.py test` to install testing requirements and run tests
 
-Run `python setup.py linter` to run flake8
+Run `python setup.py linter` to run flake8 style checking
 
 ### 2. BeautifulSoup and json:
 To create a .json file containing all items available in Albion Online, so I could easily translate
