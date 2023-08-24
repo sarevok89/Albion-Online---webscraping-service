@@ -16,6 +16,6 @@ Pillow==5.4.1
 psycopg2-binary==2.8.2
 selenium==3.141.0
 urllib3>=1.25.3 
-uwsgi==2.0.18
+uwsgi==2.0.22
 XlsxWriter==1.1.2
 
